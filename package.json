@@ -1,0 +1,23 @@
+{
+  "name": "playwright_academy_playwright_fall25_vn",
+  "version": "1.0.0",
+  "description": "fifka_playwright_academy",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cherry-Wood/playwright_academy_playwright_fall25_VN.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Cherry-Wood/playwright_academy_playwright_fall25_VN/issues"
+  },
+  "homepage": "https://github.com/Cherry-Wood/playwright_academy_playwright_fall25_VN#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0"
+  }
+}
