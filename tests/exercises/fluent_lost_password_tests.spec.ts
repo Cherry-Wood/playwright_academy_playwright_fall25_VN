@@ -1,7 +1,7 @@
 import { test } from "@playwright/test";
 import { LoginPage } from "../../src/pages/pmtool/login_page.ts";
 
-test("Test lost password using fluent: fill lost password info", async ({
+test("Test: lost password using fluent: fill lost password info", async ({
   page,
 }) => {
   const loginPage = new LoginPage(page);
@@ -13,7 +13,7 @@ test("Test lost password using fluent: fill lost password info", async ({
     .then((lostPassword) => lostPassword.clickSent());
 });
 
-test("Test lost password using fluent: right back to login", async ({
+test("Test: lost password using fluent: right back to login", async ({
   page,
 }) => {
   const loginPage = new LoginPage(page);
