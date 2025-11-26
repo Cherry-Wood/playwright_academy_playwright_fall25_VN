@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { expect, Locator, Page, test } from "@playwright/test";
 import { DashboardPage } from "./dashboard_page.ts";
 import { LostPasswordPage } from "./lost_password_page.ts";
 
@@ -9,6 +9,7 @@ export class LoginPage {
   readonly passwordImput: Locator;
   readonly loginButton: Locator;
   readonly lostpasswordButton: Locator;
+  readonly pageHeader: Locator;
 
   constructor(page: Page) {
     this.page = page; // ? Nastavení stránky abychom mohli interagovat s browserem
@@ -16,6 +17,7 @@ export class LoginPage {
     this.passwordImput = page.locator("#password");
     this.loginButton = page.locator('[type="submit"]');
     this.lostpasswordButton = page.locator("#forget_password");
+    this.pageHeader = page.locator(".form-title");
   }
 
   async open() {
@@ -40,14 +42,23 @@ export class LoginPage {
 
   // ? Explicitní typovou anotaci používáme zejména při komplexních metodách, abychom i do budoucnosti (když se bude měnit obsah této metody) měli jasno, kam tato metoda bude pokračovat.
   async login(username: string, password: string): Promise<DashboardPage> {
-    await this.fillUsername(username);
-    await this.fillPassword(password);
-    await this.clickLogin();
+    await test.step("Login to Pmtool", async () => {
+      await this.fillUsername(username);
+      await this.fillPassword(password);
+      await this.clickLogin();
+    });
     return new DashboardPage(this.page);
   }
 
   async clickPasswordForgotten() {
     await this.lostpasswordButton.click();
     return new LostPasswordPage(this.page);
+  }
+
+  async pageHeaderAsserts(expectedText: string) {
+    await expect(this.pageHeader, "Page Header is Visible").toBeVisible();
+    await expect(this.pageHeader, "Page Header has Text").toHaveText(
+      expectedText
+    );
   }
 }
