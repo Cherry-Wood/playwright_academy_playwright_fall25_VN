@@ -22,14 +22,24 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: [["html"], ["dot"]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  timeout: 60_000, // ? Nastavení timeoutu na 60 sekund (timeout se nastavuje vždy v ms) - maximální doba běhu testu
+  globalTimeout: 1 * 60 * 60 * 1_000, // ? Nastavení maximální doby běhu všech spuštěných testů (npx playwright test)
+  expect: {
+    timeout: 7_000, // ? Nastavení maximální čekací doby pro kontroly (asserty)
+  },
   use: {
+    actionTimeout: 7_000, // ? Maximální doba běhu akce (click, fill...)
+    navigationTimeout: 40_000, // ? Maximálně doba běhu goto()
+    // ignoreHTTPSErrors: true, // ! Vypnutí kontroly bezpečnosti (certifikátů) prohlížečů. Opatrně! Používáme například na testovacích prostředích, kde není dobře vyřešená bezpečnost nebo certifikáty
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    screenshot: "only-on-failure",
+    // video: "on",
+    trace: "retain-on-failure",
   },
 
   /* Configure projects for major browsers */
@@ -49,7 +59,7 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
 */
-    /* Test against mobile viewports. */
+    /*     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
@@ -57,7 +67,7 @@ export default defineConfig({
     // {
     //   name: 'Mobile Safari',
     //   use: { ...devices['iPhone 12'] },
-    // },
+    // }, */
 
     /* Test against branded browsers. */
     // {
