@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "fifka_playwright_academy",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:ui": "playwright test --ui"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Cherry-Wood/playwright_academy_playwright_fall25_VN.git"
