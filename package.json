@@ -31,5 +31,9 @@
   },
   "directories": {
     "test": "tests"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.19",
+    "dotenv": "^17.2.3"
   }
 }

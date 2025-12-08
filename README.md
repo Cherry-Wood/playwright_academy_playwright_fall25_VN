@@ -4,7 +4,7 @@ fifka_playwright_academy
 
 playwright.yml run: npx playwright test first.spec.ts
 
-
+// "resolveJsonModule": true
 
 // * Ternární operátor:
 const isValid: boolean = true;
