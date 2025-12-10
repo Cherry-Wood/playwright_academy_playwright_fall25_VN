@@ -10,6 +10,7 @@ export class LoginPage {
   readonly loginButton: Locator;
   readonly lostpasswordButton: Locator;
   readonly pageHeader: Locator;
+  readonly loginForm: Locator;
 
   constructor(page: Page) {
     this.page = page; // ? Nastavení stránky abychom mohli interagovat s browserem
@@ -18,6 +19,7 @@ export class LoginPage {
     this.loginButton = page.locator('[type="submit"]');
     this.lostpasswordButton = page.locator("#forget_password");
     this.pageHeader = page.locator(".form-title");
+    this.loginForm = page.locator(".content-login");
   }
 
   async open() {
@@ -60,5 +62,11 @@ export class LoginPage {
     await expect(this.pageHeader, "Page Header has Text").toHaveText(
       expectedText
     );
+    return this;
+  }
+
+  async visualCheckLoginForm() {
+    await expect(this.loginForm).toHaveScreenshot("login_form_test.png");
+    return this;
   }
 }
